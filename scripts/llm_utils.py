@@ -48,7 +48,8 @@ def create_chat_completion(messages, model=None, temperature=cfg.temperature, ma
 
     if response is None:
         raise RuntimeError("Failed to get response after 5 retries")
-        
+    
+    tokens = response["usage"]["total_tokens"]
     if model == cfg.fast_llm_model:
         cost = tokens * (0.002 / 1000)
     else:
